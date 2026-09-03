@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { getRoute } from "@/data/routes";
+import { getRoute, SITE_INDEXABLE } from "@/data/routes";
 
 /** Resolve a site-relative path to a fully-qualified canonical URL. */
 export function absoluteUrl(path = "/"): string {
@@ -53,7 +53,18 @@ export function buildMetadata({
       description,
       images: [ogImage],
     },
-    robots: route?.indexable === false ? { index: false, follow: false } : { index: true, follow: true },
+    robots:
+      SITE_INDEXABLE && route?.indexable !== false
+        ? {
+            index: true,
+            follow: true,
+            googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+          }
+        : {
+            index: false,
+            follow: false,
+            googleBot: { index: false, follow: false },
+          },
   };
 }
 
