@@ -19,17 +19,11 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: `${SITE.name} - ${SITE.tagline}` }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE.name} - ${SITE.tagline}`,
-    description: SITE.description,
-    images: [SITE.ogImage],
-  },
   // Per-page metadata (see `buildMetadata`) overrides this; pages marked
   // non-indexable in the route registry opt back out to noindex.
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
   icons: {
